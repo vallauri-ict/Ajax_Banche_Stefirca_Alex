@@ -1,39 +1,35 @@
 <!doctype html>
 <html>
 	<head>
+		<title>Ajax Finance</title>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>01 - Ajax Finance</title>
 		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
 		<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 		<script src="https://code.jquery.com/jquery-3.4.1.min.js"> </script>
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 		<script src="index.js"></script>
 	</head>
+	<style>
+		::-webkit-scrollbar {
+			display: none;
+		}	
+	</style>
 	<body>
-		<div class="container-fluid">
-			<div class="row" style="margin-top:2%">
-				<div class="col-sm-2"></div>
-				<div class="col-sm-8">
-					<select class="form-control" id="slctSymbol" style="width: 210px;">
-						<option value="BMWYY">Bmw</option>
-						<option value="LGF-A">Lions Gate</option>
-						<option value="MSFT">Microsoft Corporation</option>
-						<option value="TSLA">Tesla</option>
-						<option value="SNE">Sony</option>
-						<option value="NTDOY">Nintendo</option>
-						<option value="005930.KOR">Samsung</option>
-						<option value="0P6N.ILN">Volkswagen</option>
-						<option value="RACE">Ferrari</option>
-						<option value="F">Ford</option>
-						<option value="GM">General Motors</option>
-						<option value="TOSYY">Toshiba</option>
-						<option value="FCAU">Fiat Chrysler Automobiles</option>
-						<option value="FUJHY">Subaro Baracca</option>
-					</select>
+		<div class="container-fluid" style="padding:0px;">
+			<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+				<select class="form-control" id="Symbol" style="width: 210px;">	</select>
+				<form class="form-inline" style="margin-left: 68%;">
+				  <input class="form-control mr-sm-2" type="text" id="search" placeholder="Search">
+				</form>
+			</nav>
+			<div class="row">
+				<div class="col-sm-3"></div>
+				<div class="col-sm-6" style="padding:0;">
 					<br>
 					<div id="quote">
-						<table class="table table-bordered table-striped">
+						<table class="table table-bordered table-striped" id="table">
 							<style>
 								th{ height: 60px; width:50px }
 								td{ height: 30px; width:50px }
@@ -49,21 +45,18 @@
 								<th>Day's High</th>
 								<th>Volume</th>
 							</tr>
-							<tr>
-								<td id="symbol"></td>
-								<td id="lastTrade"></td>
-								<td id="lastTradeTime"></td>
-								<td id="change"></td>
-								<td id="open"></td>
-								<td id="previousClose"></td>
-								<td id="daysLow"></td>
-								<td id="daysHigh"></td>
-								<td id="volume"></td>
-							</tr>
 						</table>
 					</div>
+					<div>
+						<p>Choose the sector:</p>
+						<select class="form-control" id="Sector"></select>
+					</div>
+					<canvas id="myChart" width="600" height="400" style="margin-top: 20px"></canvas>
+					<a id="download" download="ChartImage.jpg" href="" class="btn btn-primary float-left bg-flat-color-1" style="margin-right: 5px" title="Download chart">
+						<i class="fa fa-download"></i>
+					</a>				
 				</div>
-				<div class="col-sm-2"></div>
+				<div class="col-sm-3"></div>
 			</div>
 		</div>
 	</body>
