@@ -56,7 +56,7 @@ $(document).ready(function () {
         let sector=this.value;
         $.getJSON("http://localhost:3000/chart", function(data){
 			newChart.destroy();
-			newChart = new Chart(chart,data);
+			newChart = new Chart(_Chart,data);
 			let labels=data["data"]["labels"]=[];
 			let values=data["data"]["datasets"][0]["data"]=[];
 			let backgroundColor=data["data"]["datasets"][0]["backgroundColor"]=[];
