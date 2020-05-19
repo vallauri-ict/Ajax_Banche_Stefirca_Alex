@@ -4,11 +4,10 @@ let APIKEY="F8R34RSCPRYURAUW";
 
 $(document).ready(function () {
     let _Symbol=$("#Symbol");
-	let chart=$("#myChart").hide();
-	let myChart= new Chart(chart,{});
-	let _btnDownload=$("#download").hide();
-	
-	// 1. Load the JavaScript client library.
+	let _Chart=$("#myChart").hide();
+	let newChart= new Chart(_Chart,{});
+    let _btnDownload=$("#download").hide();
+    let _btnUpload=$("#upload").hide();
 
 	$.getJSON("http://localhost:3000/companies", function(data)
     {
@@ -55,10 +54,9 @@ $(document).ready(function () {
 	
 	$("#Sector").on("change", function(){
         let sector=this.value;
-        //Creazione chart
         $.getJSON("http://localhost:3000/chart", function(data){
-			myChart.destroy();
-			myChart = new Chart(chart,data);
+			newChart.destroy();
+			newChart = new Chart(chart,data);
 			let labels=data["data"]["labels"]=[];
 			let values=data["data"]["datasets"][0]["data"]=[];
 			let backgroundColor=data["data"]["datasets"][0]["backgroundColor"]=[];
@@ -73,9 +71,10 @@ $(document).ready(function () {
 				backgroundColor.push("rgba("+Random(0,255)+","+Random(0,255)+","+Random(0,255)+",0.2)");
 			}
 				
-			myChart.update();
-			chart.show();
-			_btnDownload.show();
+			newChart.update();
+			_Chart.show();
+            _btnDownload.show();
+            _btnUpload.show();
 			});
         });
     });
@@ -83,7 +82,6 @@ $(document).ready(function () {
 	_btnDownload.on('click', function(){_btnDownload.prop("href", document.getElementById("myChart").toDataURL("image/jpg"));});
 });
 
-//////////////////////   Funzioni   /////////////////////////
 
 function getGlobalQuotes(symbol, n) {
     let url = "https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=" + symbol + "&apikey=" + APIKEY;

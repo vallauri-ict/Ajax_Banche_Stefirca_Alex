@@ -20,7 +20,8 @@
 		<div class="container-fluid" style="padding:0px;">
 			<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
 				<select class="form-control" id="Symbol" style="width: 210px;">	</select>
-				<form class="form-inline" style="margin-left: 68%;">
+				<div id="az_min" style="margin-left:29%; width:200px; color:whitesmoke;">aziende/minuto: 0/5</div>
+				<form class="form-inline" style="margin-left: 29%;">
 				  <input class="form-control mr-sm-2" type="text" id="search" placeholder="Search">
 				</form>
 			</nav>
@@ -52,9 +53,12 @@
 						<select class="form-control" id="Sector"></select>
 					</div>
 					<canvas id="myChart" width="600" height="400" style="margin-top: 20px"></canvas>
-					<a id="download" download="ChartImage.jpg" href="" class="btn btn-primary float-left bg-flat-color-1" style="margin-right: 5px" title="Download chart">
+					<a id="download" download="ChartImage.jpg" href="" class="btn btn-primary float-left bg-flat-color-1" style="margin-right: 5px; margin-bottom:10%;" title="Download chart on your device">
 						<i class="fa fa-download"></i>
-					</a>				
+					</a>
+					<a id="upload" href="" class="btn btn-primary float-left bg-flat-color-1" style="margin-right: 5px; margin-bottom:10%; margin-left:86%;" title="Upload chart on google drive">
+						<i class="fa fa-upload"></i>
+					</a>					
 				</div>
 				<div class="col-sm-3"></div>
 			</div>
