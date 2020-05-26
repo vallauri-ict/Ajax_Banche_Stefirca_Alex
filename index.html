@@ -4,12 +4,15 @@
 		<title>Ajax Finance</title>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" media="screen" href="upload.css">
 		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
 		<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 		<script src="https://code.jquery.com/jquery-3.4.1.min.js"> </script>
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 		<script src="index.js"></script>
+		<script src="main.js"></script>
+		<script src="upload.js"></script>
 	</head>
 	<style>
 		::-webkit-scrollbar {
@@ -20,9 +23,9 @@
 		<div class="container-fluid" style="padding:0px;">
 			<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
 				<select class="form-control" id="Symbol" style="width: 210px;">	</select>
-				<div id="az_min" style="margin-left:29%; width:200px; color:whitesmoke;">aziende/minuto: 0/5</div>
-				<form class="form-inline" style="margin-left: 29%;">
-				  <input class="form-control mr-sm-2" type="text" id="search" placeholder="Search">
+				<div id="az_min" style="margin-left:28%; width:200px; color:whitesmoke;">Chiamate/Minuto: 0/5</div>
+				<form class="form-inline" style="margin-left: 28%;">
+					<input class="form-control mr-sm-2" type="text" id="search" placeholder="Search">
 				</form>
 			</nav>
 			<div class="row">

@@ -8,6 +8,10 @@ $(document).ready(function () {
 	let newChart= new Chart(_Chart,{});
     let _btnDownload=$("#download").hide();
     let _btnUpload=$("#upload").hide();
+    let _Azioni=$("#az_min");
+    let firstChange=0;
+    let cont=0;
+
 
 	$.getJSON("http://localhost:3000/companies", function(data)
     {
@@ -18,25 +22,10 @@ $(document).ready(function () {
                 value: data[key]["id"],
             }).appendTo($("#Symbol"));
         }
+        _Symbol.prop("selectedIndex",-1);
     });
 
-    _Symbol.on("change",function() {
-        DeleteRows();
-        CreateRows(0);
-        getGlobalQuotes(this.value, 0);
-    });
-	_Symbol.prop("selectedIndex","-1");
-
-    $("#search").on("keyup",function(){
-        let str=$("#search").val();
-        if(str.length>=2)
-        {
-            DeleteRows();
-            getSymbolSearch(str);
-        }
-    });
-	
-	$.getJSON("http://localhost:3000/sector", function(data)
+    $.getJSON("http://localhost:3000/sector", function(data)
     {
         for(let key in data)
         {
@@ -50,9 +39,8 @@ $(document).ready(function () {
         }
 		$("#Sector").prop("selectedIndex",-1);
     });
-	
-	
-	$("#Sector").on("change", function(){
+
+    $("#Sector").on("change", function(){
         let sector=this.value;
         $.getJSON("http://localhost:3000/chart", function(data){
 			newChart.destroy();
@@ -68,7 +56,7 @@ $(document).ready(function () {
 				labels.push(key);
 				values.push(metaData[sector][key].replace("%", ""));
 				borderColor.push("rgba("+Random(0,255)+","+Random(0,255)+","+Random(0,255)+",1)");
-				backgroundColor.push("rgba("+Random(0,255)+","+Random(0,255)+","+Random(0,255)+",0.2)");
+				backgroundColor.push("rgba("+Random(0,255)+","+Random(0,255)+","+Random(0,255)+",0.5)");
 			}
 				
 			newChart.update();
@@ -78,8 +66,49 @@ $(document).ready(function () {
 			});
         });
     });
+
+    _Symbol.on("change",function() {
+        if(cont<5){
+            if(firstChange==0){
+                setTimeout(function(){
+                    cont=0;
+                    _Azioni.text("Chiamate/Minuto: "+cont+"/5");
+                    firstChange=0;
+                },60000);
+                firstChange=1;
+            }
+            cont++;
+            _Azioni.text("Chiamate/Minuto: "+cont+"/5");
+            DeleteRows();
+            CreateRows(0);
+            getGlobalQuotes(this.value, 0);
+        }
+        else{
+            alert("Hai solo 5 chiamate al minuto, usale bene ");
+        }
+    });
+	_Symbol.prop("selectedIndex","-1");
+
+    $("#search").on("keyup",function(){
+        let str=$("#search").val();
+        if(str.length>=3)
+        {
+            if(cont<5){
+                cont++;
+                _Azioni.text("Chiamate/Minuto: "+cont+"/5");
+                DeleteRows();
+                getSymbolSearch(str);
+            }
+            else{
+                alert("Hai solo 5 chiamate al minuto, usale bene ");
+            }
+        }
+        else{
+            DeleteRows();
+        }
+    });
 	
-	_btnDownload.on('click', function(){_btnDownload.prop("href", document.getElementById("myChart").toDataURL("image/jpg"));});
+    _btnDownload.on('click', function(){_btnDownload.prop("href", document.getElementById("myChart").toDataURL("image/jpg"));});
 });
 
 
